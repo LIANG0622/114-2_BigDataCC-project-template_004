@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台中港離岸風電成果展示 - 完整數據整合版</title>
+<style>
+:root { --primary-blue: #004a99; --bg-gray: #f4f7f6; --accent-red: #d9534f; }
+body { font-family: "Microsoft JhengHei", sans-serif; background-color: var(--bg-gray); margin: 0; padding: 20px; line-height: 1.6; }
+.container { max-width: 1000px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+h1 { color: var(--primary-blue); text-align: center; border-bottom: 3px solid var(--primary-blue); padding-bottom: 15px; margin-bottom: 30px; }
+h2 { color: var(--primary-blue); margin-top: 40px; border-left: 5px solid var(--primary-blue); padding-left: 15px; }
+.img-container { text-align: center; margin: 20px 0; border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #fff; }
+img { max-width: 100%; height: auto; border-radius: 5px; }
+.description { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #eee; margin: 10px 0; }
+.formula-box { background: #fff3cd; border-left: 5px solid #f39c12; padding: 15px; margin: 15px 0; font-family: "Courier New", Courier, monospace; font-weight: bold; font-size: 1.1em; }
+.table-wrapper { overflow-x: auto; margin: 20px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85em; text-align: center; }
+th { background-color: var(--primary-blue); color: white; padding: 12px; border: 1px solid #ddd; }
+td { padding: 10px; border: 1px solid #ddd; }
+tr:nth-child(even) { background-color: #f9f9f9; }
+.highlight-row { background-color: #fff3cd !important; font-weight: bold; }
+.btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
+.toggle-btn { padding: 10px 25px; background: #eef5ff; border: 2px solid var(--primary-blue); color: var(--primary-blue); border-radius: 30px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+.toggle-btn:hover, .toggle-btn.active { background: var(--primary-blue); color: white; }
+.month-btn { padding: 8px 12px; background: #f8f9fa; border: 1px solid #ccc; border-radius: 5px; cursor: pointer; }
+.month-btn.active { background: var(--primary-blue); color: white; border-color: var(--primary-blue); }
+.data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+.card { background: #eef5ff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--primary-blue); }
+.highlight-text { color: var(--accent-red); font-weight: bold; font-size: 1.2em; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>台中港離岸風電發電效率分析</h1>
+
+<!-- 一、研究場域 -->
+<h2>一、研究場域與地理資訊</h2>
+<div class="data-grid">
+<div class="card">
+<h3>觀測場域資訊</h3>
+<p><strong>台中港中心點：</strong> 120.8667, 24.4333</p>
+<p><strong>臺中港浮標觀測站：</strong> 120.4094, 24.2372</p>
+</div>
+<div class="card">
+<h3>成果概要</h3>
+<p>透過巨量海象資料清洗，本研究建立 <strong>1-12 月海象迴歸模型</strong>，精確量化 8MW 風機之電力貢獻。</p>
+</div>
+</div>
+<div class="img-container">
+<p style="font-weight:bold;">觀測場域地理分佈圖</p>
+<img src="2.png" alt="觀測場域地圖">
+</div>
+
+<!-- 二、海氣象總體趨勢 (格式已修改) -->
+<h2>二、2024-2025 海氣象總體趨勢</h2>
+<div class="img-container">
+<p style="font-weight:bold;">2024-2025 風速趨勢分佈圖</p>
+<img src="9.png" alt="風速趨勢">
+</div>
+<div class="img-container">
+<p style="font-weight:bold;">2024-2025 波高趨勢分佈圖</p>
+<img src="10.png" alt="波高趨勢">
+</div>
+
+<!-- 三、月平均風速分布特徵 -->
+<h2>三、月平均風速分布特徵</h2>
+<div class="description">
+<p>根據 1-12 月平均風速分布圖，台中港風速在東北季風期間顯著增強。11 月與 12 月的風速表現最為穩定且強勁。</p>
+</div>
+<div class="img-container">
+<p style="font-weight:bold;">1~6 月平均風速分布圖 </p>
+<img src="w1.png" alt="1~6 月平均風速">
+</div>
+<div class="img-container">
+<p style="font-weight:bold;">7~12 月平均風速分布圖 </p>
+<img src="w2.png" alt="7~12 月平均風速">
+</div>
+
+<!-- 四、各月散佈圖分析 -->
+<h2>四、各月風速-波高散佈圖分析成果</h2>
+<div class="btn-group">
+<button class="month-btn active" onclick="changeScatter(1, this)">1 月</button>
+<button class="month-btn" onclick="changeScatter(2, this)">2 月</button>
+<button class="month-btn" onclick="changeScatter(3, this)">3 月</button>
+<button class="month-btn" onclick="changeScatter(4, this)">4 月</button>
+<button class="month-btn" onclick="changeScatter(5, this)">5 月</button>
+<button class="month-btn" onclick="changeScatter(6, this)">6 月</button>
+<button class="month-btn" onclick="changeScatter(7, this)">7 月</button>
+<button class="month-btn" onclick="changeScatter(8, this)">8 月</button>
+<button class="month-btn" onclick="changeScatter(9, this)">9 月</button>
+<button class="month-btn" onclick="changeScatter(10, this)">10 月</button>
+<button class="month-btn" onclick="changeScatter(11, this)">11 月</button>
+<button class="month-btn" onclick="changeScatter(12, this)">12 月</button>
+</div>
+<div class="img-container">
+<img id="scatterImg" src="s1.png" alt="各月散佈圖">
+<p id="monthNote" style="font-weight: bold; color: var(--primary-blue);">目前顯示：1 月散佈圖成果</p>
+</div>
+
+<!-- 五、發電效益與民生用電數據分析 -->
+<h2>五、發電效益與民生用電數據分析</h2>
+<div class="description">
+<div class="formula-box">
+公式一：全台平均用電度數 4,152 = 346 (月平均) × 12 個月
+</div>
+<div class="formula-box">
+公式二：支應戶數 6,175 戶 = 25,637,484 (單機年總發電) ÷ 4,152 度
+</div>
+<div class="btn-group">
+<button id="btnDetailed" class="toggle-btn active" onclick="showTable('detailed')">觀看台灣平均月用電統計</button>
+<button id="btnTurbine" class="toggle-btn" onclick="showTable('turbine')">觀看 8MW 單機發電效益統計</button>
+</div>
+
+<div id="detailedTable" class="table-wrapper">
+<h3 style="text-align:center;">台灣平均月用電度數統計 (來自 平均用電.png)</h3>
+<table>
+<thead>
+<tr><th>項目</th><th>用電度數 (kWh)</th></tr>
+</thead>
+<tbody>
+<tr><td>夏月 (6-9 月)</td><td>428</td></tr>
+<tr><td>非夏月 (10-5 月)</td><td>305</td></tr>
+<tr class="highlight-row"><td>全年平均月用電</td><td>346</td></tr>
+<tr class="highlight-row" style="color:var(--accent-red);"><td>全年平均總用電 (4152 度)</td><td>4,152</td></tr>
+</tbody>
+</table>
+</div>
+
+<div id="turbineTable" class="table-wrapper" style="display:none;">
+<h3 style="text-align:center;">8MW 單機發電效益月度統計 (含天數)</h3>
+<table>
+<thead>
+<tr>
+<th>月份</th>
+<th>逐日發電量 (MW·h)</th>
+<th>天數</th>
+<th>月總發電量 (MW·h)</th>
+<th>月總度數 (kW·h)</th>
+<th>支應戶數</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>1 月</td><td>129.45</td><td>31</td><td>4012.96</td><td>4,012,960</td><td>966 戶</td></tr>
+<tr><td>2 月</td><td>98.19</td><td>28</td><td>2749.24</td><td>2,749,242</td><td>662 戶</td></tr>
+<tr><td>3 月</td><td>72.08</td><td>31</td><td>2234.39</td><td>2,234,386</td><td>538 戶</td></tr>
+<tr><td>4 月</td><td>26.10</td><td>30</td><td>782.98</td><td>782,983</td><td>188 戶</td></tr>
+<tr><td>5 月</td><td>22.89</td><td>31</td><td>709.44</td><td>709,439</td><td>171 戶</td></tr>
+<tr><td>6 月</td><td>10.14</td><td>30</td><td>304.06</td><td>304,064</td><td>73 戶</td></tr>
+<tr><td>7 月</td><td>20.38</td><td>31</td><td>631.67</td><td>631,674</td><td>152 戶</td></tr>
+<tr><td>8 月</td><td>4.74</td><td>31</td><td>146.94</td><td>146,936</td><td>35 戶</td></tr>
+<tr><td>9 月</td><td>4.03</td><td>30</td><td>121.00</td><td>121,002</td><td>29 戶</td></tr>
+<tr><td>10 月</td><td>99.80</td><td>31</td><td>3093.75</td><td>3,093,752</td><td>745 戶</td></tr>
+<tr><td>11 月</td><td>202.46</td><td>30</td><td>6073.70</td><td>6,073,696</td><td>1462 戶</td></tr>
+<tr><td>12 月</td><td>154.11</td><td>31</td><td>4777.35</td><td>4,777,351</td><td>1150 戶</td></tr>
+<tr class="highlight-row">
+<td>全年總計</td><td>-</td><td>365</td><td>25637.48</td><td style="color:red;">25,637,484</td><td style="color:red;">6,175 戶</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- 六、研究總結與願景 -->
+<h2>六、研究總結與區域能源願景</h2>
+<div class="description">
+<div class="formula-box">
+計算公式：台中年平均電力需求 (34,550,000,000 度) ÷ 單機年發電量 (25,637,484 度) = 1,347.6 支
+</div>
+<p>若要達成台中地區電力完全自給自足，預計需佈署之 8MW 風機總數為 <span class="highlight-text">1,347.6 支</span>。</p>
+</div>
+<div class="img-container">
+<p style="font-weight:bold;">台中與全台平均用電量對比 (平均用電 2.png)</p>
+<img src="平均用電2.png" alt="區域能源願景">
+</div>
+<div class="data-grid">
+<div class="card">
+<h3>單機民生貢獻結論</h3>
+<p>單機年發電量可供應 <span class="highlight-text">6,175 戶</span> 家庭全年度用電。</p>
+</div>
+<div class="card">
+<h3>台中自給自足願景</h3>
+<p>所需 8MW 風機總量：<span class="highlight-text">1,347.6 支</span>。</p>
+</div>
+</div>
+</div>
+
+<script>
+function changeScatter(month, btn) {
+document.getElementById('scatterImg').src = 's' + month + '.png';
+document.getElementById('monthNote').innerText = '目前顯示：' + month + ' 月散佈圖成果';
+const btns = document.getElementsByClassName('month-btn');
+for (let b of btns) b.classList.remove('active');
+btn.classList.add('active');
+}
+function showTable(type) {
+const detailed = document.getElementById('detailedTable');
+const turbine = document.getElementById('turbineTable');
+const btnD = document.getElementById('btnDetailed');
+const btnT = document.getElementById('btnTurbine');
+if (type === 'detailed') {
+detailed.style.display = 'block';
+turbine.style.display = 'none';
+btnD.classList.add('active');
+btnT.classList.remove('active');
+} else {
+detailed.style.display = 'none';
+turbine.style.display = 'block';
+btnD.classList.remove('active');
+btnT.classList.add('active');
+}
+}
+</script>
+</body>
+</html>
