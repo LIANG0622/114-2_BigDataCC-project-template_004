@@ -25,8 +25,14 @@
 
 ## 資料夾結構
 
-- `raw/`：原始資料，未經處理
-- `processed/`：經過清洗和轉換後的資料
+```text
+data/
+├── raw/
+│   └── 初始資料.csv
+├── processed/
+│   └── 清洗後資料.csv
+└── README.md
+```
 
 ## 注意事項
 
